@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:temps/app/presentation/routes/router.dart';
 import 'generated/translations.g.dart';
 
 void main() {
-  runApp(const TempsApp());
+  runApp(
+    TranslationProvider(
+      child: const ProviderScope(
+        overrides: [],
+        child: TempsApp(),
+      ),
+    ),
+  );
 }
 
 class TempsApp extends StatefulWidget {

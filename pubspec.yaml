@@ -21,6 +21,9 @@ dependencies:
   slang: ^3.28.0
   slang_flutter: ^3.28.0
   intl: ^0.18.1
+  dio: ^5.4.0
+  connectivity_plus: ^5.0.2
+  geolocator: ^10.1.0
 
 dev_dependencies:
   flutter_test:

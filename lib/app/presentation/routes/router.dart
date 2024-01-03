@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:temps/main.dart';
 
-import '../../../splash_view.dart';
 import '../modules/home/home_view.dart';
+import '../splash_view.dart';
 import 'routes.dart';
 
 mixin RouterMixin on State<TempsApp> {
