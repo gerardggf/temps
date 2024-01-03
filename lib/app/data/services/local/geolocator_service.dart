@@ -8,6 +8,7 @@ final geolocatorServiceProvider = Provider<GeolocatorService>(
 class GeolocatorService {
   Position? _position;
 
+  ///The current user position is set in the splash view when the app is started
   Position? get position => _position;
 
   Future<Position> determinePosition() async {
@@ -19,6 +20,7 @@ class GeolocatorService {
       return Future.error('Location services are disabled.');
     }
 
+    //Permissions logic
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();

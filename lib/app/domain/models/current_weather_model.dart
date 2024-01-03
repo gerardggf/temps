@@ -1,4 +1,4 @@
-class WeatherModel {
+class CurrentWeatherModel {
   final Coord coord;
   final List<Weather> weather;
   final String base;
@@ -13,7 +13,7 @@ class WeatherModel {
   final String name;
   final int cod;
 
-  WeatherModel({
+  CurrentWeatherModel({
     required this.coord,
     required this.weather,
     required this.base,
@@ -29,7 +29,7 @@ class WeatherModel {
     required this.cod,
   });
 
-  WeatherModel copyWith({
+  CurrentWeatherModel copyWith({
     Coord? coord,
     List<Weather>? weather,
     String? base,
@@ -44,7 +44,7 @@ class WeatherModel {
     String? name,
     int? cod,
   }) =>
-      WeatherModel(
+      CurrentWeatherModel(
         coord: coord ?? this.coord,
         weather: weather ?? this.weather,
         base: base ?? this.base,
@@ -60,7 +60,8 @@ class WeatherModel {
         cod: cod ?? this.cod,
       );
 
-  factory WeatherModel.fromJson(Map<String, dynamic> json) => WeatherModel(
+  factory CurrentWeatherModel.fromJson(Map<String, dynamic> json) =>
+      CurrentWeatherModel(
         coord: Coord.fromJson(json["coord"]),
         weather:
             List<Weather>.from(json["weather"].map((x) => Weather.fromJson(x))),
