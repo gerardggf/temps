@@ -7,5 +7,6 @@ class HomeState with _$HomeState {
   factory HomeState({
     @Default(false) bool fetching,
     @Default(false) bool isFarenheit,
+    @Default(null) String? searchBarText,
   }) = _HomeState;
 }

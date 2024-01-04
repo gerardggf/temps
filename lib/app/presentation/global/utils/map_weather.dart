@@ -12,38 +12,42 @@ IconData mapIcons(int id) {
       return CupertinoIcons.cloud_rain;
     case > 600 && < 699:
       return Icons.snowing;
-    case > 701 || 711 || 741:
+    case 701 || 711 || 741:
       return Icons.foggy;
-    case > 781:
+    case 781:
       return Icons.tornado_outlined;
-    case > 800:
-      return Icons.wb_sunny_outlined;
-    case > 801 && < 899:
-      return Icons.cloud_outlined;
+    case 800:
+      return CupertinoIcons.sun_max;
+    case 801 || 802:
+      return CupertinoIcons.cloud_sun;
+    case >= 803 && < 899:
+      return CupertinoIcons.cloud;
     default:
       return Icons.wb_sunny_outlined;
   }
 }
 
-Color mapColors(int id) {
+List<Color> mapGradient(int id) {
   switch (id) {
     case > 200 && < 299:
-      return AppColors.cloudy;
+      return [AppColors.lightCloudy, AppColors.cloudy];
     case > 300 && < 399:
-      return AppColors.lightCloudy;
+      return [AppColors.lightCloudy, AppColors.lightCloudy];
     case > 500 && < 599:
-      return AppColors.cloudy;
+      return [AppColors.lightCloudy, AppColors.cloudy];
     case > 600 && < 699:
-      return AppColors.snowy;
-    case > 701 || 711 || 741:
-      return AppColors.cloudy;
-    case > 781:
-      return AppColors.heavyCloudy;
-    case > 800:
-      return AppColors.clearSky;
-    case > 801 && < 899:
-      return AppColors.cloudy;
+      return [AppColors.cloudy, AppColors.snowy];
+    case 701 || 711 || 741:
+      return [AppColors.lightCloudy, AppColors.cloudy];
+    case 781:
+      return [AppColors.cloudy, AppColors.heavyCloudy];
+    case 800:
+      return [AppColors.clearSky, AppColors.sky];
+    case 801 || 802:
+      return [AppColors.cloudy, AppColors.clearSky];
+    case >= 803 && < 899:
+      return [AppColors.cloudy, AppColors.cloudy];
     default:
-      return AppColors.clearSky;
+      return [AppColors.clearSky, AppColors.sky];
   }
 }

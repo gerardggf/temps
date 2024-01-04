@@ -6,6 +6,7 @@ class AppColors {
   //Weather widget background colors
 
   static const clearSky = Color.fromARGB(255, 124, 196, 255);
+  static const sky = Color.fromARGB(255, 35, 127, 201);
   static const cloudy = Color.fromARGB(255, 133, 133, 133);
   static const lightCloudy = Color.fromARGB(255, 187, 187, 187);
   static const heavyCloudy = Color.fromARGB(255, 90, 90, 90);

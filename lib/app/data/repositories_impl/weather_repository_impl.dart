@@ -5,7 +5,7 @@ import 'package:temps/app/domain/models/current_weather_model.dart';
 import 'package:temps/app/domain/repositories/weather_repository.dart';
 
 import '../../domain/either/either.dart';
-import '../../domain/http_failure/http_failure.dart';
+import '../../domain/http_failure/error_type.dart';
 
 class WeatherRepositoryImpl implements WeatherRepository {
   WeatherRepositoryImpl(
@@ -17,50 +17,64 @@ class WeatherRepositoryImpl implements WeatherRepository {
   final GeolocatorService geolocatorService;
 
   @override
-  Future<Either<HttpFailure, CurrentWeatherModel>>
-      getCurrentWeatherData() async {
-    if (geolocatorService.position == null) {
-      return Either.left(
-        HttpFailure.noPosition(),
-      );
+  Future<Either<ErrorType, CurrentWeatherModel>> getCurrentWeatherData(
+      {String? city}) async {
+    if (city?.isEmpty ?? true) {
+      if (geolocatorService.position == null) {
+        return Either.left(
+          ErrorType.noPosition(),
+        );
+      }
     }
-    print(
-      Endpoints.nextDaysWeatherUrl(geolocatorService.position!),
-    );
+    //print(Endpoints.currentWeatherByCityUrl(geolocatorService.position!));
+    //print(Endpoints.currentWeatherByPosUrl(city!));
     try {
-      //print(Endpoints.weatherUrl(geolocatorService.position!));
       final response = await dio.get(
-        Endpoints.currentWeatherUrl(geolocatorService.position!),
+        city?.isNotEmpty ?? false
+            ? Endpoints.currentWeatherByCityUrl(city!)
+            : Endpoints.currentWeatherByPosUrl(geolocatorService.position!),
       );
-
-      final result = CurrentWeatherModel.fromJson(response.data);
-      return Either.right(result);
+      if (response.statusCode == 200) {
+        return Either.right(
+          CurrentWeatherModel.fromJson(response.data),
+        );
+      }
+      return Either.left(
+        ErrorType.unknown(),
+      );
     } catch (e) {
+      if (e is DioException) {
+        final statusCode = e.response?.statusCode;
+        if (statusCode == null) {
+          return Either.left(
+            ErrorType.connection(),
+          );
+        }
+        switch (statusCode) {
+          case 401:
+            return Either.left(
+              ErrorType.apiKey(),
+            );
+          case 404:
+            return Either.left(
+              ErrorType.locationNotFound(),
+            );
+          case 429:
+            return Either.left(
+              ErrorType.freePlan(),
+            );
+          case 500 || 502 || 503 || 504:
+            return Either.left(
+              ErrorType.server(),
+            );
+          default:
+            return Either.left(
+              ErrorType.connection(),
+            );
+        }
+      }
       return Either.left(
-        HttpFailure.network(),
-      );
-    }
-  }
-
-  @override
-  Future<Either<HttpFailure, CurrentWeatherModel>>
-      getNextDaysWeatherData() async {
-    if (geolocatorService.position == null) {
-      return Either.left(
-        HttpFailure.noPosition(),
-      );
-    }
-    try {
-      //print(Endpoints.nextDaysWeatherUrl(geolocatorService.position!),);
-      final response = await dio.get(
-        Endpoints.nextDaysWeatherUrl(geolocatorService.position!),
-      );
-
-      final result = CurrentWeatherModel.fromJson(response.data);
-      return Either.right(result);
-    } catch (e) {
-      return Either.left(
-        HttpFailure.network(),
+        ErrorType.unknown(),
       );
     }
   }

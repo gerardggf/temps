@@ -15,4 +15,7 @@ class HomeController extends StateNotifier<HomeState> {
 
   void updateIsFahrenheit(bool value) =>
       state = state.copyWith(isFarenheit: value);
+
+  void updateSearchBarText(String? value) =>
+      state = state.copyWith(searchBarText: value?.trim().toLowerCase());
 }
