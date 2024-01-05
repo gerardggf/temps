@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:temps/app/data/services/local/geolocator_service.dart';
+import 'package:temps/app/domain/repositories/preferences_repository.dart';
 
+import '../../generated/translations.g.dart';
 import '../domain/repositories/connectivity_repository.dart';
 import 'routes/routes.dart';
 
@@ -19,6 +21,10 @@ class _SplashViewState extends ConsumerState<SplashView> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback(
       (_) async {
+        LocaleSettings.setLocale(
+          ref.read(preferencesRepositoryProvider).locale ??
+              LocaleSettings.useDeviceLocale(),
+        );
         await ref.read(connectivityRepositoryProvider).initialize();
         await ref.read(geolocatorServiceProvider).determinePosition();
         _init();

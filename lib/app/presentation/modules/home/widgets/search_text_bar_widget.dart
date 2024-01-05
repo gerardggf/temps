@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../home_controller.dart';
+import 'package:temps/app/presentation/modules/settings/settings_controller.dart';
 
 class SearchTextBarWidget extends ConsumerWidget {
-  const SearchTextBarWidget({super.key, required this.searchController});
+  const SearchTextBarWidget({
+    super.key,
+    required this.searchController,
+  });
 
   final TextEditingController searchController;
 
@@ -25,7 +27,7 @@ class SearchTextBarWidget extends ConsumerWidget {
               controller: searchController,
             ),
           ),
-          if (ref.watch(homeControllerProvider).searchBarText?.isNotEmpty ??
+          if (ref.watch(settingControllerProvider).searchBarText?.isNotEmpty ??
               false)
             Padding(
               padding: const EdgeInsets.only(right: 10),
@@ -33,7 +35,7 @@ class SearchTextBarWidget extends ConsumerWidget {
                 onPressed: () {
                   searchController.text = '';
                   ref
-                      .read(homeControllerProvider.notifier)
+                      .read(settingControllerProvider.notifier)
                       .updateSearchBarText(null);
                 },
                 icon: const Icon(
@@ -48,7 +50,7 @@ class SearchTextBarWidget extends ConsumerWidget {
             child: IconButton(
               onPressed: () {
                 ref
-                    .read(homeControllerProvider.notifier)
+                    .read(settingControllerProvider.notifier)
                     .updateSearchBarText(searchController.text);
               },
               icon: const Icon(

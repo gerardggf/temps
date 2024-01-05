@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:temps/generated/translations.g.dart';
 
 import '../../../../../const/colors.dart';
 
@@ -13,13 +14,13 @@ class LocationNotFoundWidget extends StatelessWidget {
             gradient: LinearGradient(
           colors: [AppColors.clearSky, AppColors.sky],
         )),
-        child: const Center(
+        child: Center(
           child: Padding(
-            padding: EdgeInsets.all(30),
+            padding: const EdgeInsets.all(30),
             child: Text(
-              'No se ha encontrado la ciudad',
+              texts.global.theLocationHasNotBeenFound,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
                 fontSize: 26,

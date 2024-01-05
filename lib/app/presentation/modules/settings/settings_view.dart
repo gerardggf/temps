@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:temps/app/const/dropdown_options.dart';
+import 'package:temps/app/presentation/global/utils/map_languages.dart';
 import 'package:temps/app/presentation/modules/settings/settings_controller.dart';
 import 'package:temps/generated/translations.g.dart';
 
@@ -17,6 +18,10 @@ class _HomeViewState extends ConsumerState<SettingsView> {
     final controller = ref.watch(settingControllerProvider);
     return Scaffold(
       appBar: AppBar(
+        title: Text(
+          texts.settings.settings,
+          style: const TextStyle(color: Colors.black),
+        ),
         elevation: 0,
         backgroundColor: Colors.transparent,
         leading: const BackButton(
@@ -24,10 +29,13 @@ class _HomeViewState extends ConsumerState<SettingsView> {
         ),
       ),
       body: ListView(
+        physics: const BouncingScrollPhysics(),
+        padding: const EdgeInsets.all(10),
         children: [
           ListTile(
-            title: const Text('Temperatura'),
-            onTap: () {},
+            title: Text(
+              texts.settings.temperature,
+            ),
             trailing: DropdownButton(
               underline: const SizedBox(),
               value: controller.isFarenheit
@@ -48,30 +56,26 @@ class _HomeViewState extends ConsumerState<SettingsView> {
             ),
           ),
           ListTile(
-            title: const Text('Idioma'),
-            onTap: () {},
+            title: Text(
+              texts.settings.language,
+            ),
             trailing: DropdownButton(
-              value: DropdownOptions.language[controller.locale.index],
+              value: controller.locale,
               underline: const SizedBox(),
-              items: DropdownOptions.language
+              items: AppLocale.values
                   .map(
                     (e) => DropdownMenuItem(
                       value: e,
                       child: Text(
-                        e,
+                        mapLanguages(e),
                       ),
                     ),
                   )
                   .toList(),
               onChanged: (value) {
-                final result = {
-                  DropdownOptions.language[0]: AppLocale.ca,
-                  DropdownOptions.language[1]: AppLocale.es,
-                  DropdownOptions.language[2]: AppLocale.en,
-                };
                 ref
                     .read(settingControllerProvider.notifier)
-                    .updateLocale(result[value] ?? AppLocale.en);
+                    .updateLocale(value ?? AppLocale.en);
               },
             ),
           ),

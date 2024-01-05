@@ -10,5 +10,6 @@ class SettingsState with _$SettingsState {
     @Default(false) bool fetching,
     @Default(false) bool isFarenheit,
     @Default(AppLocale.en) AppLocale locale,
+    @Default(null) String? searchBarText,
   }) = _SettingsState;
 }

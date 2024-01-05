@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:temps/generated/translations.g.dart';
 
 class NoPositionWidget extends StatelessWidget {
   const NoPositionWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       backgroundColor: Colors.grey,
       body: Center(
-        child: Text('No se ha podido encontrar tu posición'),
+        child: Text(
+          texts.global.yourLocationCouldNotBeDetected,
+        ),
       ),
     );
   }

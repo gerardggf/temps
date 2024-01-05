@@ -1,3 +1,13 @@
 {
-    "language": "Català"
+    "language": "Català",
+    "currentLocation": "Ubicació actual",
+    "searchCity": "Buscar ciutat",
+    "tempMax": "Temp. màx.",
+    "tempMin": "Temp. min.",
+    "feelsLike": "Sensació de",
+    "humidity": "Humitat",
+    "anErrorHasOccurred": "S'ha produït un error",
+    "theLocationHasNotBeenFound": "No s'ha trobat la localitat",
+    "yourLocationCouldNotBeDetected": "No s'ha pogut detectar la teva ubicació",
+    "noInternet": "No tens connexió a Internet"
 }

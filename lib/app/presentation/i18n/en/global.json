@@ -1,3 +1,13 @@
 {
-    "language": "English"
+    "language": "English",
+    "currentLocation": "Current location",
+    "searchCity": "Search city",
+    "tempMax": "Min. temp.",
+    "tempMin": "Max. temp.",
+    "feelsLike": "Feels like",
+    "humidity": "Humidity",
+    "anErrorHasOccurred": "An error has occurred",
+    "theLocationHasNotBeenFound": "The location has not been found",
+    "yourLocationCouldNotBeDetected": "Your location could not be detected",
+    "noInternet": "You have no internet"
 }

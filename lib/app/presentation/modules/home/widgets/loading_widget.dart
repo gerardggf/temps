@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:temps/app/presentation/global/extensions/num_sizedbox_extension.dart';
+import 'package:temps/generated/translations.g.dart';
 
 import '../../../../const/colors.dart';
 
@@ -22,13 +23,13 @@ class LoadingWidget extends ConsumerWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Expanded(
+              Expanded(
                 flex: 3,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Ubicación actual'),
-                    Text(
+                    Text(texts.global.currentLocation),
+                    const Text(
                       '-',
                       style: TextStyle(fontSize: 30),
                     ),
@@ -42,37 +43,27 @@ class LoadingWidget extends ConsumerWidget {
                   children: [
                     const SizedBox(
                       height: 120,
-                      child: FittedBox(
-                        fit: BoxFit.fitWidth,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.all(20),
-                              child: CircularProgressIndicator(
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
+                      child: Text(
+                        '-',
+                        style: TextStyle(fontSize: 50),
                       ),
                     ),
                     Expanded(
                       child: Column(
                         children: [
                           const Text(
-                            '- ºC',
+                            '-',
                             style: TextStyle(fontSize: 60),
                           ),
                           20.h,
-                          const Row(
+                          Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Text(
-                                'Temp min.  - ºC',
+                                '${texts.global.tempMin}  -',
                               ),
                               Text(
-                                'Temp máx.  - ºC',
+                                '${texts.global.tempMax}  -',
                               ),
                             ],
                           ),
@@ -83,26 +74,26 @@ class LoadingWidget extends ConsumerWidget {
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const Text(
-                                    'Sensación de',
-                                    style: TextStyle(fontSize: 11),
+                                  Text(
+                                    texts.global.feelsLike,
+                                    style: const TextStyle(fontSize: 11),
                                   ),
                                   3.h,
                                   const Text(
-                                    '- ºC',
+                                    '-',
                                   ),
                                 ],
                               ),
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const Text(
-                                    'Humedad',
-                                    style: TextStyle(fontSize: 11),
+                                  Text(
+                                    texts.global.humidity,
+                                    style: const TextStyle(fontSize: 11),
                                   ),
                                   3.h,
                                   const Text(
-                                    '- %',
+                                    '-',
                                   ),
                                 ],
                               ),

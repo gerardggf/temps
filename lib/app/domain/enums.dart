@@ -1,0 +1,4 @@
+enum Preferences {
+  locale,
+  temperature,
+}

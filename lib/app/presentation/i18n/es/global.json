@@ -1,3 +1,13 @@
 {
-    "language": "Español"
+    "language": "Español",
+    "currentLocation": "Ubicación actual",
+    "searchCity": "Buscar ciudad",
+    "tempMax": "Temp. máx.",
+    "tempMin": "Temp. min.",
+    "feelsLike": "Sensación de",
+    "humidity": "Humedad",
+    "anErrorHasOccurred": "Se ha producido un error",
+    "theLocationHasNotBeenFound": "No se ha encontrado la localidad",
+    "yourLocationCouldNotBeDetected": "No se ha podido detectar tu ubicación",
+    "noInternet": "No tienes conexión a Internet"
 }

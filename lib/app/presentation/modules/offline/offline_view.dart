@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:temps/generated/translations.g.dart';
 
 class OfflineView extends StatelessWidget {
   const OfflineView({super.key});
@@ -7,9 +8,11 @@ class OfflineView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
-        child: Text('No internet'),
+        child: Text(
+          texts.global.noInternet,
+        ),
       ),
     );
   }

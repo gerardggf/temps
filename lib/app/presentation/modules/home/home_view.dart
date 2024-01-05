@@ -4,10 +4,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:temps/app/domain/models/current_weather_model.dart';
 import 'package:temps/app/domain/repositories/weather_repository.dart';
-import 'package:temps/app/presentation/modules/home/home_controller.dart';
 import 'package:temps/app/presentation/modules/home/widgets/errors/location_not_found_widget.dart';
 import 'package:temps/app/presentation/modules/home/widgets/loading_widget.dart';
+import 'package:temps/app/presentation/modules/settings/settings_controller.dart';
 import 'package:temps/app/presentation/routes/routes.dart';
+import 'package:temps/generated/translations.g.dart';
 import '../../../domain/either/either.dart';
 import '../../../domain/http_failure/error_type.dart';
 import 'weather_widget.dart';
@@ -33,7 +34,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    final controller = ref.watch(homeControllerProvider);
+    final controller = ref.watch(settingControllerProvider);
     final getWeatherFuture = controller.searchBarText != null
         ? ref.watch(getWeatherFutureProvider(controller.searchBarText))
         : ref.watch(getWeatherFutureProvider(null));
@@ -51,10 +52,10 @@ class _HomeViewState extends ConsumerState<HomeView> {
                       locationNotFound: () => const LocationNotFoundWidget(),
                       orElse: () => Container(
                         color: Colors.grey,
-                        child: const Center(
+                        child: Center(
                           child: Text(
-                            'Se ha producido un error',
-                            style: TextStyle(color: Colors.white),
+                            texts.global.anErrorHasOccurred,
+                            style: const TextStyle(color: Colors.white),
                           ),
                         ),
                       ),
@@ -62,8 +63,8 @@ class _HomeViewState extends ConsumerState<HomeView> {
                   },
                   right: (data) {
                     if (kDebugMode) {
-                      print(data.weather.first.id);
-                      print(data.weather.first.description);
+                      print(data.weather.map((e) => e.id));
+                      print(data.weather.map((e) => e.description));
                     }
                     return WeatherWidget(weather: data);
                   },
